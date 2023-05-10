@@ -1,7 +1,7 @@
 ﻿#ifndef DATASRECEIVETHREAD_H
 #define DATASRECEIVETHREAD_H
 #include <QThread>
-
+#include "hex_data_struct.h"
 class AbstractModbusDevice;
 class DataBuffer;
 class DatasReceiveThread : public QThread
@@ -22,6 +22,7 @@ private:
     AbstractModbusDevice* m_pModbusDevice;
     //定义数据缓存区实例指针
     DataBuffer *m_pDataBuf;
+    hex_data_struct m_hex_data;
 
 public:
     bool m_bRunning;

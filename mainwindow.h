@@ -7,7 +7,7 @@
 #include <QList>
 #include <QString>
 #include "./Global/global.h"
-
+#include "hex_thread.h"
 
 namespace Ui {
 class MainWindow;
@@ -51,6 +51,12 @@ private slots:
 
     void on_pushButton_save_clicked();
 
+    void on_openfile_clicked();
+
+    void on_updata_hard_clicked();
+
+    void on_up_hardfire_clicked();
+
 private:
     QByteArray m_sendDatas;
     QList<QSerialPortInfo> spInfoList;
@@ -58,12 +64,15 @@ private:
     AbstractModbusDevice* m_pModbusDevice;
     //定义线程实例指针
     DatasReceiveThread* m_pRecvThread;
+    //hex下载线程
+    hex_thread* m_my_hexThread;
     //定义数据缓存区实例指针
     DataBuffer *m_pDataBuf;
     bool m_isTiming;
     QTimer *sendTimer;
     QString m_strData;
     QString m_hexData;
+    QString m_file_path;
 
     //字符串显示形式QList
     QList<DataInfo> m_lstFrames;

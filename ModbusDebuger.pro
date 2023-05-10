@@ -8,6 +8,9 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
+    file_deal.cpp \
+    hex_data_struct.cpp \
+    hex_thread.cpp \
         mainwindow.cpp  \
     extserialportmodbusdevice.cpp \
     Global/QextSerialPort/qextserialbase.cpp \
@@ -25,6 +28,9 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h \
     extserialportmodbusdevice.h \
+    file_deal.h \
+    hex_data_struct.h \
+    hex_thread.h \
     mainwindow.cpp.autosave \
     Global/QextSerialPort/qextserialbase.h \
     Global/QextSerialPort/qextserialport.h \

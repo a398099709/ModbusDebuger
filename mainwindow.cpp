@@ -13,7 +13,7 @@
 #include <QHostAddress>
 #include <QFile>
 #include <QFileDialog>
-
+#include "hex_thread.h"
 #ifdef _MSC_VER
 #pragma execution_character_set("utf-8")
 #endif
@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->spinBox_timing->setEnabled(false);
     InitSerialPortList();
     InitSerialPortBaudRateList();
-
+    m_my_hexThread = new hex_thread(this);
     m_pRecvThread = new DatasReceiveThread(this);
     m_pDataBuf = new DataBuffer(this);
     m_pRecvThread->setDataBuffer(m_pDataBuf);
@@ -115,6 +115,8 @@ void MainWindow::update()
     }
 }
 
+
+    /*根据 hex按键是否显示hex数据还是正常数据*/
 void MainWindow::showFrame(const DataInfo &frame)
 {
     QString strText;
@@ -375,4 +377,40 @@ void MainWindow::on_pushButton_save_clicked()
     QString data = ui->textEdit_recv->toPlainText();
     file.write(data.toLatin1());
 
+}
+    /*
+        点击读取文件获取文件路劲
+    */
+void MainWindow::on_openfile_clicked()
+{
+    qDebug()<<"打开hex文件";
+        m_file_path = QFileDialog::getOpenFileName(this,"文件路径","..../");
+        m_my_hexThread->set_path(m_file_path);
+       qDebug()<<m_file_path;
+       ui->file_path->setText(m_file_path);
+       /*emit signalPath(path);
+       if(firestThread->isRunning()==true)
+       {
+            firestThread->exit();
+            qDebug()<<"线程正在运行将关闭线程";
+       }
+       else
+            {
+                qDebug()<<"线程未运行";
+            }
+       firestThread->start();  */ //启动线程槽函数
+}
+    /*
+        点击更新固件读取文本数据
+    */
+void MainWindow::on_updata_hard_clicked()
+{
+//        //开启读取文件线程
+//    m_my_hexThread->start();
+}
+
+void MainWindow::on_up_hardfire_clicked()
+{
+    //开启读取文件线程
+    m_my_hexThread->start();
 }
