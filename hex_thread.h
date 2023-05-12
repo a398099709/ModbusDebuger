@@ -15,11 +15,13 @@ public:
 protected :
         QString m_file_path;
         hex_data_struct m_hex_data;
+        void sig_startThread(void);
 
 public slots:
-        void sig_startThread(void);
+        
 signals:
-        void sig_deal(QString path);
+        void sig_deal_path(QString path);
+        void sig_deal_file(void);
 };
 
 #endif // HEX_THREAD_H

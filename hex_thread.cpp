@@ -6,7 +6,8 @@ hex_thread::hex_thread(QObject *parent) :QThread(parent)
      file_deal *do_file_deal = new file_deal;
      do_file_deal->moveToThread(&workerThread);
      connect(&workerThread, &QThread::finished, do_file_deal, &QObject::deleteLater);
-     connect(this, &hex_thread::sig_deal, do_file_deal, &file_deal::file_deal_data);
+     connect(this, &hex_thread::sig_deal_path, do_file_deal, &file_deal::get_open_file_path);
+     connect(this, &hex_thread::sig_deal_file, do_file_deal, &file_deal::file_deal_data);
      //connect(do_file_deal, &file_deal::resultReady, this, &hex_thread::handleResults);
      
 }
@@ -43,4 +44,5 @@ void hex_thread::set_path(QString path)
 void hex_thread::sig_startThread(void)
 {
     workerThread.start();
+    qDebug()<<" thread open";
 }

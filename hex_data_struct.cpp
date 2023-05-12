@@ -49,14 +49,22 @@ char hex_data_struct::HexToBin(HexFormatForLine* ba)//,QDataStream & out)//retur
     unsigned int absoluteAddrCurrent = 0x00;//计算当前记录的绝对地址
     unsigned int Bytesskipped = 0;//被跳过的字节数
     char i=0;
+    QString buf;
    // qDebug()<<"你好";
     switch(ba->datatype)
     {
+        case 0:
         for(i=0;i<ba->datalen;i++)
         {
-             qDebug()<<ba->databuf[i];
+            //buf+=ba->databuf[i];
+            buf+=QString::number(ba->databuf[i],16);
+            //qDebug()<<("%x",ba->databuf[i]);
         }
+        qDebug()<<buf;
         qDebug()<<"data";
+        break;
+        default : qDebug()<<"error data type";
+
     }
     return 0;
 }

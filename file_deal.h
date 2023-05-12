@@ -9,11 +9,11 @@ class file_deal : public QObject //,public hex_data_struct
     Q_OBJECT
 public:
     explicit file_deal(QObject *parent = nullptr);
-    QFile* hexfile;
+    QFile hexfile;
 signals:
 public slots:
     void file_deal_data(void);
-    void open_file(QString path);
+    void get_open_file_path(QString path);
 private :
     QString m_file_path;
     char Data[8];

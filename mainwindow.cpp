@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->spinBox_timing->setEnabled(false);
     InitSerialPortList();
     InitSerialPortBaudRateList();
-    m_my_hexThread = new hex_thread(this);
+    //m_my_hexThread = new hex_thread(this);
     m_pRecvThread = new DatasReceiveThread(this);
     m_pDataBuf = new DataBuffer(this);
     m_pRecvThread->setDataBuffer(m_pDataBuf);
@@ -385,7 +385,7 @@ void MainWindow::on_openfile_clicked()
 {
     qDebug()<<"打开hex文件";
         m_file_path = QFileDialog::getOpenFileName(this,"文件路径","..../");
-        m_my_hexThread->set_path(m_file_path);
+       emit my_thread.sig_deal_path(m_file_path);
        qDebug()<<m_file_path;
        ui->file_path->setText(m_file_path);
        /*emit signalPath(path);
@@ -412,5 +412,7 @@ void MainWindow::on_updata_hard_clicked()
 void MainWindow::on_up_hardfire_clicked()
 {
     //开启读取文件线程
-    m_my_hexThread->start();
+    qDebug()<<"thread open";
+    emit my_thread.sig_deal_file();
+    my_thread.workerThread.start();
 }

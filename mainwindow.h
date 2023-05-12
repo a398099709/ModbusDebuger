@@ -26,7 +26,7 @@ protected:
     void InitSerialPortList();
     void InitSerialPortBaudRateList();
     void setDataBuffer(DataBuffer *pBuf);
-
+    hex_thread my_thread;
 protected slots:
     void on_pushButton_open_clicked();
     void update();
@@ -65,7 +65,7 @@ private:
     //定义线程实例指针
     DatasReceiveThread* m_pRecvThread;
     //hex下载线程
-    hex_thread* m_my_hexThread;
+    //hex_thread* m_my_hexThread;
     //定义数据缓存区实例指针
     DataBuffer *m_pDataBuf;
     bool m_isTiming;
