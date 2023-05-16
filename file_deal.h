@@ -10,6 +10,7 @@ class file_deal : public QObject //,public hex_data_struct
 public:
     explicit file_deal(QObject *parent = nullptr);
     QFile hexfile;
+    QTimer *timer;
 signals:
 public slots:
     void solt_read_file(void);
