@@ -27,9 +27,9 @@
    <widget class="QTextEdit" name="textEdit_recv">
     <property name="geometry">
      <rect>
-      <x>9</x>
-      <y>9</y>
-      <width>1239</width>
+      <x>0</x>
+      <y>30</y>
+      <width>1001</width>
       <height>188</height>
      </rect>
     </property>
@@ -488,6 +488,9 @@
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <property name="leftMargin">
+      <number>30</number>
+     </property>
      <item>
       <widget class="QCheckBox" name="checkBox_hexShow">
        <property name="enabled">

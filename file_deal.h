@@ -12,6 +12,7 @@ public:
     QFile hexfile;
 signals:
 public slots:
+    void solt_read_file(void);
     void file_deal_data(void);
     void get_open_file_path(QString path);
 private :
@@ -19,6 +20,7 @@ private :
     char Data[8];
     //hex_data_struct file_hex_data;
     bool FileExist;
+    bool m_file_read;
     hex_data_struct::HexFormatForLine m_hex_data;
     hex_data_struct m_data_struct;
     //hex_data_struct::

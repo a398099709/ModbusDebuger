@@ -202,11 +202,13 @@ void MainWindow::on_pushButton_open_clicked()
         ui->groupBox->setEnabled(false);
         ui->pushButton_open->setEnabled(false);
         //启动接收线程
+        m_seialOpenTrue=TRUE;
         m_pRecvThread->setModbusDevice(m_pModbusDevice);
         m_pRecvThread->start();
     }
     else
     {
+        m_seialOpenTrue = FALSE;
         QMessageBox msgBox;
         msgBox.setWindowTitle(tr("提示"));
         msgBox.setText(tr("设备打开失败，请检查串口是否被占用"));
@@ -337,7 +339,7 @@ void MainWindow::on_checkBox_hexSend_clicked(bool checked)
     }
 }
 
-
+/*开启定时发送*/
 void MainWindow::on_checkBox_timing_clicked(bool checked)
 {
     if(!checked)
@@ -413,6 +415,18 @@ void MainWindow::on_up_hardfire_clicked()
 {
     //开启读取文件线程
     qDebug()<<"thread open";
-    emit my_thread.sig_deal_file();
-    my_thread.workerThread.start();
+    //if(m_seialOpenTrue)
+    {
+        my_thread.workerThread.start();
+        emit my_thread.sig_deal_file();
+    }
+    // else
+    // {
+    //     QMessageBox msgBox;
+    //     msgBox.setWindowTitle(tr("提示"));
+    //     msgBox.setText(tr("串口未打开"));
+    //     msgBox.exec();
+    // }
+    
+    
 }

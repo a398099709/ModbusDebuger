@@ -1,5 +1,5 @@
 ﻿#include "file_deal.h"
-
+#include <QTimer>
 file_deal::file_deal(QObject *parent) : QObject(parent)
 {
 
@@ -10,15 +10,30 @@ file_deal::file_deal(QObject *parent) : QObject(parent)
     qDebug()<<"FileExist:"<<FileExist;
     if(FileExist)
     {
-         qDebug()<<"file open true";
+        qDebug()<<"file open true";
+        QTimer timer ;
+        connect(&timer, SIGNAL(timeout()), this, SLOT(solt_read_file()));
+        timer.start(100);
          while(!hexfile.atEnd())
          {
-             qDebug()<<"file loop deal";
-             QByteArray array = QByteArray::fromHex(hexfile.readLine());//从hex文件中读取一行
-             m_data_struct.ReadHexLineData(&m_hex_data,array);//将一行数据解读到HexDataStr结构体
-             m_data_struct.HexToBin(&m_hex_data);//,out);//将解读后的数据写入bin文件
+            if(m_file_read)
+            {
+                qDebug()<<"file loop deal";
+                QByteArray array = QByteArray::fromHex(hexfile.readLine());//从hex文件中读取一行
+                m_data_struct.ReadHexLineData(&m_hex_data,array);//将一行数据解读到HexDataStr结构体
+                m_data_struct.HexToBin(&m_hex_data);//,out);//将解读后的数据写入bin文件
+
+                m_file_read=0;
+            }
+            else
+            {
+                //qDebug()<<"file loop error";
+            }
+            //QThread::msleep(100);
+
          }
          hexfile.close();//关闭文件
+        qDebug()<<"file read finish";
     }
     ;
  }
@@ -37,4 +52,9 @@ void file_deal::get_open_file_path(QString path)
     {
         FileExist=0;
     }
+}
+void file_deal::solt_read_file(void)
+{
+     qDebug()<<"timer solt";
+    m_file_read=1;
 }

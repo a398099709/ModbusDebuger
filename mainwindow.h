@@ -73,7 +73,7 @@ private:
     QString m_strData;
     QString m_hexData;
     QString m_file_path;
-
+    bool m_seialOpenTrue;
     //字符串显示形式QList
     QList<DataInfo> m_lstFrames;
 };
