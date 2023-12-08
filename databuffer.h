@@ -2,7 +2,7 @@
 #define DATABUFFER_H
 #include "./Global/global.h"
 #include <QDateTime>
-#include <QMutex>
+
 class DataBuffer: public QObject
 {
     Q_OBJECT
